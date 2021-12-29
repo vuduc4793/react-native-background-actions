@@ -45,6 +45,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
             contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         }
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setNotificationSilent()
                 .setContentTitle(taskTitle)
                 .setContentText(taskDesc)
                 .setSmallIcon(iconInt)
@@ -89,7 +90,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
     private void createNotificationChannel(@NonNull final String taskTitle, @NonNull final String taskDesc) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            final int importance = NotificationManager.IMPORTANCE_LOW;
+            final int importance = NotificationManager.IMPORTANCE_MIN;
             final NotificationChannel channel = new NotificationChannel(CHANNEL_ID, taskTitle, importance);
             channel.setDescription(taskDesc);
             final NotificationManager notificationManager = getSystemService(NotificationManager.class);
