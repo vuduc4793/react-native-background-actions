@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -50,9 +51,12 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
                 .setContentText(taskDesc)
                 .setSmallIcon(iconInt)
                 .setContentIntent(contentIntent)
-                .setOngoing(true)
+                .setBadgeIconType(NotificationCompat.BADGE_ICON_SMALL)
                 .setPriority(NotificationCompat.PRIORITY_MIN)
-                .setColor(color);
+                .setColor(Color.rgb(89, 205, 213))
+                .setVisibility(NotificationCompat.VISIBILITY_SECRET)
+                .setAutoCancel(true);
+
 
         final Bundle progressBarBundle = bgOptions.getProgressBar();
         if (progressBarBundle != null) {
@@ -92,7 +96,9 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             final int importance = NotificationManager.IMPORTANCE_MIN;
             final NotificationChannel channel = new NotificationChannel(CHANNEL_ID, taskTitle, importance);
-            channel.setDescription(taskDesc);
+//            channel.setDescription(taskDesc);
+            channel.setLightColor(Color.rgb(89, 205, 213));
+            channel.setShowBadge(false);
             final NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
