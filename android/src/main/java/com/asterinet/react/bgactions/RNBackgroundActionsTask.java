@@ -22,7 +22,7 @@ import com.facebook.react.jstasks.HeadlessJsTaskConfig;
 final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
     public static final int SERVICE_NOTIFICATION_ID = 92901;
-    private static final String CHANNEL_ID = "RN_BACKGROUND_ACTIONS_CHANNEL";
+    private static final String CHANNEL_ID = "";
 
     @NonNull
     public static Notification buildNotification(@NonNull Context context, @NonNull final BackgroundTaskOptions bgOptions) {
@@ -94,7 +94,7 @@ final public class RNBackgroundActionsTask extends HeadlessJsTaskService {
 
     private void createNotificationChannel(@NonNull final String taskTitle, @NonNull final String taskDesc) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            final int importance = NotificationManager.IMPORTANCE_MIN;
+            final int importance = NotificationManager.IMPORTANCE_NONE;
             final NotificationChannel channel = new NotificationChannel(CHANNEL_ID, taskTitle, importance);
 //            channel.setDescription(taskDesc);
             channel.setLightColor(Color.rgb(89, 205, 213));
